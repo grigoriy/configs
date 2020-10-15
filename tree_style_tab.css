@@ -1,0 +1,52 @@
+/* Show title of unread tabs with red and italic font */
+.tab.unread .label {
+    color: red !important;
+    font-style: italic !important;
+}
+
+/* Add private browsing indicator per tab */
+.tab.private-browsing .label:before {
+    content: "🕶";
+}
+
+
+/* As little space before the tab name as possible.
+ *    The fold/unfold icon is not affected. */
+.tab:not(.pinned) {
+    padding-left: 0px !important; /* !important is required when there are enough tabs to cause a scrollbar */
+}
+
+/* Tabs count */
+#tabbar {
+    counter-reset: vtabs atabs tabs;
+    /* vtabs tracks visible tabs, atabs tracks active tabs, tabs tracks all tabs */
+}
+.tab:not(.collapsed):not(.discarded) {
+    counter-increment: vtabs atabs tabs;
+}
+.tab:not(.collapsed) {
+    counter-increment: vtabs tabs;
+}
+.tab:not(.discarded) {
+    counter-increment: atabs tabs;
+}
+.tab {
+    counter-increment: tabs;
+    font-size: x-small;
+    height: 25px;
+}
+
+.tab .extra-items-container {
+    z-index: unset !important;
+}
+.tab .extra-items-container::after {
+    background: Highlight;
+
+    content: counter(tabs);
+    font-size: x-small;
+    font-weight: bold;
+    right: 0em;
+    pointer-events: none;
+    position: fixed;
+    z-index:1000
+}
