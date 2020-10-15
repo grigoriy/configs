@@ -39,14 +39,22 @@
 .tab .extra-items-container {
     z-index: unset !important;
 }
+
 .tab .extra-items-container::after {
     background: Highlight;
 
     content: counter(tabs);
-    font-size: x-small;
+    font-size: xx-small;
     font-weight: bold;
     right: 0em;
     pointer-events: none;
-    position: fixed;
     z-index:1000
+}
+
+.tab:not(.pinned) .extra-items-container::after {
+    position: fixed;
+}
+
+.tab.pinned .extra-items-container::after {
+    position: absolute;
 }
